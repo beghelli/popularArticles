@@ -10,7 +10,9 @@ This plugin for OJS 2 provides a sidebar block with the most popular articles pu
 
 System Requirements
 -------------------
-Same requirements as the OJS 2.4.5 core.
+
+Update OJS 2.4.5 with the latest patches listed here: http://pkp.sfu.ca/wiki/index.php?title=OJS_Recommended_Patches 
+Same requirements as the OJS 2.4.5 core. 
 
 Installation
 ------------
