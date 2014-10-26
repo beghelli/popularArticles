@@ -115,7 +115,10 @@ class PopularArticlesBlockPlugin extends BlockPlugin {
 		$journal =& $this->_getCurrentJournal();
 		if (!$journal) return '';
 
-		$templateMgr->assign('popularArticles', $this->_getPopularArticles($journal));
+		$popularArticles = $this->_getPopularArticles($journal);
+		if (empty($popularArticles)) return '';
+
+		$templateMgr->assign('popularArticles', $popularArticles);
 		$templateMgr->addStyleSheet(Request::getBaseUrl() . DIRECTORY_SEPARATOR . $this->getPluginPath() . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . 'popularArticles.css');
 		return parent::getContents($templateMgr);
 	}
@@ -185,7 +188,10 @@ class PopularArticlesBlockPlugin extends BlockPlugin {
 			false 
 		);
 
-		$articlesInfo = array();
+		$articles = array();
+		
+		if (!is_array($stats)) return $articles;
+
 		foreach ($stats as $statRecord) {
 			if (count($articlesInfo) == $maxArticlesCount) break;
 
@@ -201,13 +207,10 @@ class PopularArticlesBlockPlugin extends BlockPlugin {
 				if (strtotime($article->getDatePublished()) < $limit) continue;
 			}
 
-			$articlesInfo[$articleId] = array(
-				'article' => $article,
-				'views' => $count
-			);
+			$articles[$articleId] = $article;
 		}
 
-		return $articlesInfo;
+		return $articles;
 	}
 }
 

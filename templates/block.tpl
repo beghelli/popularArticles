@@ -10,8 +10,7 @@
  *}
 <div class="block" id="sidebarPopularArticles">
 	<span class="blockTitle">{translate key="plugins.blocks.popularArticles.displayName"}</span>
-{foreach from=$popularArticles item=articleInfo}
-	{assign var=article value=$articleInfo.article}
-	<a href="{url page="article" op="view" path=$article->getArticleId()}" title="{$article->getArticleTitle()|escape}">{$article->getArticleTitle()|truncate:40:"..."|escape}</a>
-{/foreach}
+	{foreach from=$popularArticles item=popularArticle}
+		<a href="{url page="article" op="view" path=$popularArticle->getArticleId()}" title="{$popularArticle->getArticleTitle()|escape}">{$popularArticle->getArticleTitle()|truncate:40:"..."|escape}</a>
+	{/foreach}
 </div>
